@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import ProductsPage from './ProductsPage';
+import OrdersPage from './OrdersPage';
 
 function App() {
+  const [page, setPage] = useState("MainPage");
+
+  const pages = {
+    "MainPage": <MainPage setPage={setPage}/>,
+    "ProductsPage": <ProductsPage setPage={setPage}/>,
+    "OrdersPage": <OrdersPage setPage={setPage}/>
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {pages[page]}
     </div>
   );
+}
+
+function MainPage({setPage}) {
+
+  return (<><h1>Supermarket</h1>
+  <button onClick={() => setPage("ProductsPage")}>Produtos</button>
+  <button onClick={() => setPage("OrdersPage")}>Pedidos</button></>);
 }
 
 export default App;
